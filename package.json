@@ -1,0 +1,36 @@
+{
+  "name": "livraria",
+  "version": "1.0.0",
+  "description": "Desafio Final - Bootcamp Desenvolvedor(a) Node.js - IGTI",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rewri/igti-node-desafio-final.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "mongo",
+    "postgres",
+    "igti"
+  ],
+  "author": "Rérisson Fumes <rkfumes@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rewri/igti-node-desafio-final/issues"
+  },
+  "homepage": "https://github.com/rewri/igti-node-desafio-final#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

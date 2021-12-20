@@ -1,0 +1,68 @@
+version: '3'
+
+services:
+
+  livraria-nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: livraria-nodejs
+    env_file: .env
+    environment:
+      - MONGO_USERNAME=$MONGO_USERNAME
+      - MONGO_PASSWORD=$MONGO_PASSWORD
+      - MONGO_HOSTNAME=$MONGO_HOSTNAME
+      - MONGO_PORT=$MONGO_PORT
+      - MONGO_DB=$MONGO_DB
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/app
+      - ./node_modules:/usr/app/node_modules
+    networks:
+      - livraria-network
+
+  livraria-postgres:
+    image: postgres
+    container_name: livraria-postgres
+    env_file: .env
+    environment:
+      POSTGRES_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
+    ports:
+      - '15432:5432'
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    networks:
+      - livraria-network
+
+  livraria-pgadmin:
+    image: dpage/pgadmin4
+    container_name: livraria-pgadmin
+    env_file: .env
+    environment:
+      PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
+      PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
+    ports:
+      - '16543:80'
+    depends_on:
+      - livraria-postgres
+    networks:
+      - livraria-network
+
+  livraria-mongo:
+    image: mongo:4.1.8-xenial
+    container_name: livraria-mongo
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    ports:
+      - '27017:27017'   
+    volumes:
+      - ./data/mongo:/data/db
+    networks:
+      - livraria-network
+
+networks:
+  livraria-network:
+    driver: bridge
