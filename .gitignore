@@ -1,5 +1,5 @@
-data/mongo
-data/postgres
+data/mongo/
+data/postgres/
 node_modules/
 .logs/*
 .env
