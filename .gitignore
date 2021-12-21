@@ -1,3 +1,6 @@
+data/mongo
+data/postgres
 node_modules/
 .logs/*
 .env
+*.log
